@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch input_sum",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/input_sum",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Build input_sum",
+            "environment": [
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "${workspaceFolder}/bin"
+                }
+            ],
+            "MIMode": "lldb",
+            "miDebuggerPath": "/usr/bin/lldb",
+            "stopAtEntry": true,
+            "console": "integratedTerminal"
+        }
+    ]
+}

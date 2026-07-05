@@ -1,0 +1,235 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Ensure Build Directories",
+            "type": "shell",
+            "command": "mkdir -p build bin",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": ["-c"]
+                }
+            },
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Assemble itoa",
+            "type": "shell",
+            "command": "nasm",
+            "args": [
+                "-f",
+                "elf64",
+                "numbers/itoa.s",
+                "-o",
+                "${workspaceFolder}/build/itoa.o"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": ["-c"]
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": {
+                "owner": "nasm",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):\\s+(error|warning|info):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "Link libitoa",
+            "type": "shell",
+            "command": "clang",
+            "args": [
+                "-shared",
+                "-fPIC",
+                "-g",
+                "${workspaceFolder}/build/itoa.o",
+                "-o",
+                "${workspaceFolder}/bin/libitoa.so"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": ["-c"]
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "Build libitoa",
+            "dependsOn": [
+                "Assemble itoa",
+                "Link libitoa"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "Assemble atoi",
+            "type": "shell",
+            "command": "nasm",
+            "args": [
+                "-f",
+                "elf64",
+                "numbers/atoi.s",
+                "-o",
+                "${workspaceFolder}/build/atoi.o"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": ["-c"]
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": {
+                "owner": "nasm",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):\\s+(error|warning|info):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "Link libatoi",
+            "type": "shell",
+            "command": "clang",
+            "args": [
+                "-shared",
+                "-fPIC",
+                "-g",
+                "${workspaceFolder}/build/atoi.o",
+                "-o",
+                "${workspaceFolder}/bin/libatoi.so"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": ["-c"]
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "Build libatoi",
+            "dependsOn": [
+                "Assemble atoi",
+                "Link libatoi"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "Assemble input_sum",
+            "type": "shell",
+            "command": "nasm",
+            "args": [
+                "-f",
+                "elf64",
+                "numbers/input_sum.s",
+                "-o",
+                "${workspaceFolder}/build/input_sum.o"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": ["-c"]
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": {
+                "owner": "nasm",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):\\s+(error|warning|info):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "Link input_sum",
+            "type": "shell",
+            "command": "clang",
+            "args": [
+                "-g",
+                "-pie",
+                "${workspaceFolder}/build/input_sum.o",
+                "-o",
+                "${workspaceFolder}/bin/input_sum",
+                "-L${workspaceFolder}/bin",
+                "-litoa",
+                "-latoi",
+                "-Wl,-rpath,'$ORIGIN'"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": ["-c"]
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "Build input_sum",
+            "dependsOn": [
+                "Build libitoa",
+                "Build libatoi",
+                "Assemble input_sum",
+                "Link input_sum"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}

@@ -32,4 +32,4 @@ syscall ; do the system call
 
 mov rdi, 0x2a
 mov rax, 0x3c
-syscal
+syscall
