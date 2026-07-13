@@ -19,6 +19,25 @@
             "miDebuggerPath": "/usr/bin/lldb",
             "stopAtEntry": true,
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Launch calculator",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/calculator",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Build calculator",
+            "environment": [
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "${workspaceFolder}/bin"
+                }
+            ],
+            "MIMode": "lldb",
+            "miDebuggerPath": "/usr/bin/lldb",
+            "stopAtEntry": true,
+            "console": "integratedTerminal"
         }
     ]
 }

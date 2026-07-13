@@ -5,6 +5,10 @@ global atoi:function
 
 ; rdi - input string
 atoi:
+    ; Store previous data in stack
+    push rcx
+    push rdx
+
     convert_string:
         xor rax, rax ; Output number
         xor rcx, rcx ; Counter
@@ -39,4 +43,7 @@ atoi:
             neg rax
 
     finish:
+        ; Restore data from stack
+        pop rdx
+        pop rcx
         ret

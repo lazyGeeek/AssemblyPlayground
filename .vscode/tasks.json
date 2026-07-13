@@ -230,6 +230,83 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Assemble calculator",
+            "type": "shell",
+            "command": "nasm",
+            "args": [
+                "-f",
+                "elf64",
+                "numbers/calculator.s",
+                "-o",
+                "${workspaceFolder}/build/calculator.o"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": ["-c"]
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": {
+                "owner": "nasm",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):\\s+(error|warning|info):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "Link calculator",
+            "type": "shell",
+            "command": "clang",
+            "args": [
+                "-g",
+                "-pie",
+                "${workspaceFolder}/build/calculator.o",
+                "-o",
+                "${workspaceFolder}/bin/calculator",
+                "-L${workspaceFolder}/bin",
+                "-litoa",
+                "-latoi",
+                "-Wl,-rpath,'$ORIGIN'"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": ["-c"]
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "Build calculator",
+            "dependsOn": [
+                "Build libitoa",
+                "Build libatoi",
+                "Assemble calculator",
+                "Link calculator"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
         }
     ]
 }

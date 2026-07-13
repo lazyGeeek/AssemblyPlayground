@@ -6,6 +6,12 @@ global itoa:function
 ; rdi - input number
 ; rsi - ouput buffer
 itoa:
+    ; Store previous data in stack
+    push r9
+    push r10
+    push r11
+    push rcx
+
     xor rcx, rcx ; array size
     mov r10, 10  ; devider
 
@@ -15,8 +21,8 @@ itoa:
     ; It's zero return simple '0'
     mov byte [rsi], '0'
     mov byte [rsi + 1], 0 ; NULL terminator
-    mov rax, 1            ; Return size of output string
-    ret
+    push 1                ; Return size of output string
+    jmp finish
 
     check_neg:
         test rdi, rdi ; Tests the register against itself, just to set the flags
@@ -65,5 +71,10 @@ itoa:
             jmp convert_number_loop
 
     finish:
+        ; Restore data from stack
         pop rax
+        pop rcx
+        pop r11
+        pop r10
+        pop r9
         ret
