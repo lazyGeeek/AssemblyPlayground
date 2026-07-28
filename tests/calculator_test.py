@@ -31,7 +31,7 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     calculator_app = script_dir + "/../bin/calculator"
 
-    print("=== Negate ===")
+    print("\033[36m=== Negate ===\033[0m")
 
     app_args: List[str] = [
         "-",
@@ -40,7 +40,7 @@ def main():
     app_expected = "-420"
     check_application(calculator_app, app_args, app_expected)
 
-    print("\n=== Not ===")
+    print("\n\033[36m=== Not ===\033[0m")
 
     app_args: List[str] = [
         "~",
@@ -49,7 +49,7 @@ def main():
     app_expected = "-421"
     check_application(calculator_app, app_args, app_expected)
 
-    print("\n=== Zeroes ===")
+    print("\n\033[36m=== Zeroes ===\033[0m")
 
     app_args: List[str] = [
         "0",
@@ -59,7 +59,7 @@ def main():
     app_expected = "0"
     check_application(calculator_app, app_args, app_expected)
 
-    print("\n=== Addition ===")
+    print("\n\033[36m=== Addition ===\033[0m")
 
     app_args: List[str] = [
         "1337",
@@ -69,7 +69,7 @@ def main():
     app_expected = "1757"
     check_application(calculator_app, app_args, app_expected)
 
-    print("\n=== Substitution ===")
+    print("\n\033[36m=== Substitution ===\033[0m")
 
     app_args: List[str] = [
         "1337",
@@ -79,7 +79,7 @@ def main():
     app_expected = "917"
     check_application(calculator_app, app_args, app_expected)
 
-    print("\n=== Multiplication ===")
+    print("\n\033[36m=== Multiplication ===\033[0m")
 
     app_args: List[str] = [
         "60",
@@ -89,7 +89,7 @@ def main():
     app_expected = "420"
     check_application(calculator_app, app_args, app_expected)
 
-    print("\n=== Division Full ===")
+    print("\n\033[36m=== Division Full ===\033[0m")
 
     app_args: List[str] = [
         "500",
@@ -99,7 +99,7 @@ def main():
     app_expected = "55.55556"
     check_application(calculator_app, app_args, app_expected)
 
-    print("\n=== Division Full 2 ===")
+    print("\n\033[36m=== Division Full 2 ===\033[0m")
 
     app_args: List[str] = [
         "500",
@@ -109,7 +109,7 @@ def main():
     app_expected = "71.42857"
     check_application(calculator_app, app_args, app_expected)
 
-    print("\n=== Division Partial ===")
+    print("\n\033[36m=== Division Partial ===\033[0m")
 
     app_args: List[str] = [
         "500",
@@ -119,7 +119,7 @@ def main():
     app_expected = "250"
     check_application(calculator_app, app_args, app_expected)
 
-    print("\n=== And ===")
+    print("\n\033[36m=== And ===\033[0m")
 
     app_args: List[str] = [
         "12",
@@ -129,7 +129,7 @@ def main():
     app_expected = "8"
     check_application(calculator_app, app_args, app_expected)
 
-    print("\n=== Or ===")
+    print("\n\033[36m=== Or ===\033[0m")
 
     app_args: List[str] = [
         "12",
@@ -139,7 +139,7 @@ def main():
     app_expected = "14"
     check_application(calculator_app, app_args, app_expected)
 
-    print("\n=== Xor ===")
+    print("\n\033[36m=== Xor ===\033[0m")
 
     app_args: List[str] = [
         "12",

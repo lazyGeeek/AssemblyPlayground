@@ -307,6 +307,83 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Assemble print",
+            "type": "shell",
+            "command": "nasm",
+            "args": [
+                "-f",
+                "elf64",
+                "output/print.s",
+                "-o",
+                "${workspaceFolder}/build/print.o"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": ["-c"]
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": {
+                "owner": "nasm",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):\\s+(error|warning|info):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "Link print",
+            "type": "shell",
+            "command": "clang",
+            "args": [
+                "-g",
+                "-pie",
+                "${workspaceFolder}/build/print.o",
+                "-o",
+                "${workspaceFolder}/bin/print",
+                "-L${workspaceFolder}/bin",
+                "-litoa",
+                "-latoi",
+                "-Wl,-rpath,'$ORIGIN'"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": ["-c"]
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": ["$msCompile"]
+        },
+        {
+            "label": "Build print",
+            "dependsOn": [
+                "Build libitoa",
+                "Build libatoi",
+                "Assemble print",
+                "Link print"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
         }
     ]
 }

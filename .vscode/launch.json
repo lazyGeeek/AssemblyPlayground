@@ -15,8 +15,8 @@
                     "value": "${workspaceFolder}/bin"
                 }
             ],
-            "MIMode": "lldb",
-            "miDebuggerPath": "/usr/bin/lldb",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
             "stopAtEntry": true,
             "console": "integratedTerminal"
         },
@@ -34,8 +34,27 @@
                     "value": "${workspaceFolder}/bin"
                 }
             ],
-            "MIMode": "lldb",
-            "miDebuggerPath": "/usr/bin/lldb",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "stopAtEntry": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Launch print",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/print",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Build print",
+            "environment": [
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "${workspaceFolder}/bin"
+                }
+            ],
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
             "stopAtEntry": true,
             "console": "integratedTerminal"
         }
